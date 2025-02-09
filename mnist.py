@@ -15,7 +15,7 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 
-# app.secret_key = "your_secret_key_here"  
+# app.secret_key = "your_secret_key_here"
 # submitボタンを押した際にエラーが出た場合上の行のコメントアウトを削除し、your_secret_key_hereに任意の文字列（例:aidemy)を指定し、再度アプリケーションを実行してください。
 
 def allowed_file(filename):
