@@ -16,16 +16,20 @@
         <h2>AIが送信された画像の数字を識別します (テスト中)</h2>
         <p>画像を送信してください</p>
 
-        <form method="POST" enctype="multipart/form-data">
-            <input class="file_choose" type="file" name="file" accept="image/*">
+        <form method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
+            <input class="file_choose" type="file" name="file" accept="image/*" required>
             <br>
             <!-- 画像プレビュー -->
             <img id="preview" style="display:none; max-width:200px; max-height:200px; border:2px solid #76B55B; border-radius:5px;">
             <br>
             <!-- 送信ボタン -->
-            <input class="btn" value="送信する" type="submit">
+            <input class="btn" id="submit-btn" value="送信する" type="submit">
         </form>
 
+        <!-- 処理中のメッセージ -->
+        <div id="loading" class="loading" style="display:none;">処理中です…</div>
+
+        <!-- 予測結果を目立たせる -->
         <div class="answer">{{ answer }}</div>
 
         {% if image_url %}
@@ -39,6 +43,7 @@
     </footer>
 
     <script>
+        // 画像プレビュー表示
         document.querySelector(".file_choose").addEventListener("change", function (event) {
             const file = event.target.files[0];
             if (file) {
@@ -50,6 +55,12 @@
                 reader.readAsDataURL(file);
             }
         });
+
+        // 送信ボタンを無効化し、処理中メッセージを表示
+        function disableButton() {
+            document.getElementById("submit-btn").disabled = true;
+            document.getElementById("loading").style.display = "block";
+        }
     </script>
 </body>
 </html>

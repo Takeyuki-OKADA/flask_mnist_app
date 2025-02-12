@@ -57,6 +57,28 @@ p {
         background-color: #5a9145;
     }
 
+/* 処理中のメッセージ */
+.loading {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff5733;
+}
+
+/* 予測結果を目立たせる */
+.answer {
+    margin: 40px auto;
+    padding: 15px;
+    font-size: 24px; /* 文字を大きく */
+    font-weight: bold; /* 太字 */
+    color: white;
+    background-color: #76B55B; /* 背景を緑色に */
+    border-radius: 8px;
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+}
+
 /* フッター */
 footer {
     background-color: #F7F7F7;
