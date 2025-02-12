@@ -16,51 +16,52 @@ header {
 
 /* メインコンテンツ */
 .main {
-    height: 370px;
     text-align: center;
+    padding: 20px;
 }
 
 h2 {
     color: #444444;
-    margin: 90px 0px;
+    margin: 40px 0px;
 }
 
 p {
     color: #444444;
-    margin: 70px 0px 30px 0px;
-}
-
-.answer {
-    color: #444444;
-    margin: 70px 0px 30px 0px;
-}
-
-/* フォーム */
-form {
-    text-align: center;
+    margin: 20px 0px;
 }
 
 /* 画像プレビュー */
 #preview {
     max-width: 200px;
     max-height: 200px;
-    display: none; /* 初期状態は非表示 */
+    display: none;
     margin-top: 10px;
     border: 2px solid #76B55B;
     border-radius: 5px;
 }
 
+/* 送信ボタン */
+.btn {
+    display: inline-block;
+    background-color: #76B55B;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .btn:hover {
+        background-color: #5a9145;
+    }
+
 /* フッター */
 footer {
     background-color: #F7F7F7;
-    height: 110px;
-    margin: -8px;
-    position: relative;
-}
-
-small {
-    margin: 15px 25px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    height: 80px;
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
 }

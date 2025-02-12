@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Number Classifier</title>
-    <link rel="stylesheet" href="./static/stylesheet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
 </head>
 <body>
     <header>
@@ -15,15 +15,23 @@
     <div class="main">
         <h2>AIが送信された画像の数字を識別します (テスト中)</h2>
         <p>画像を送信してください</p>
+
         <form method="POST" enctype="multipart/form-data">
             <input class="file_choose" type="file" name="file" accept="image/*">
             <br>
             <!-- 画像プレビュー -->
-            <img id="preview">
+            <img id="preview" style="display:none; max-width:200px; max-height:200px; border:2px solid #76B55B; border-radius:5px;">
             <br>
-            <input class="btn" value="submit!" type="submit">
+            <!-- 送信ボタン -->
+            <input class="btn" value="送信する" type="submit">
         </form>
+
         <div class="answer">{{ answer }}</div>
+
+        {% if image_url %}
+        <h3>アップロード画像</h3>
+        <img src="{{ image_url }}" alt="Uploaded Image" style="max-width:200px; max-height:200px;">
+        {% endif %}
     </div>
 
     <footer>
