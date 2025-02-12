@@ -8,24 +8,40 @@
     <link rel="stylesheet" href="./static/stylesheet.css">
 </head>
 <body>
-    <header>   
-        
+    <header>
         <a class="header-logo" href="#">読むぞ手書き数字</a>
     </header>
 
-    <div class="main">    
-        <h2> AIが送信された画像の数字を識別します(テスト中)</h2>
+    <div class="main">
+        <h2>AIが送信された画像の数字を識別します (テスト中)</h2>
         <p>画像を送信してください</p>
         <form method="POST" enctype="multipart/form-data">
-            <input class="file_choose" type="file" name="file">
+            <input class="file_choose" type="file" name="file" accept="image/*">
+            <br>
+            <!-- 画像プレビュー -->
+            <img id="preview">
+            <br>
             <input class="btn" value="submit!" type="submit">
         </form>
-        <div class="answer">{{answer}}</div>
+        <div class="answer">{{ answer }}</div>
     </div>
 
     <footer>
-        
-        <small>&copy; 2025 技術部メンテナンスG　岡田</small>   
+        <small>&copy; 2025 岡田製作所</small>
     </footer>
+
+    <script>
+        document.querySelector(".file_choose").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("preview").src = e.target.result;
+                    document.getElementById("preview").style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 </html>
