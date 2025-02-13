@@ -1,87 +1,14 @@
-header {
-    background-color: #76B55B;
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
-
-.header-logo {
-    color: #fff;
-    font-size: 25px;
-    margin: 15px 25px;
-}
-
-.header_img {
-    height: 25px;
-    margin: 15px 25px;
-}
-
-.main {
-    height: 370px;
-    text-align: center;
-}
-
-h2 {
-    color: #444444;
-    margin: 50px 0px;
-    text-align: center;
-}
-
-p {
-    color: #444444;
-    margin: 30px 0px;
-    text-align: center;
-}
-
-.answer {
-    color: #444444;
-    font-size: 24px; /* 文字サイズを大きくする */
-    font-weight: bold;
-    margin: 50px 0px;
-    text-align: center;
-}
-
-form {
-    text-align: center;
-}
-
-.preview {
+/* 画像プレビュー */
+#preview-container {
+    text-align: center; /* 中央配置 */
     margin-top: 20px;
-    text-align: center;
 }
 
-#previewImage {
-    max-width: 100px;
-    max-height: 100px;
-    border: 2px solid #444;
-    display: none;
-    margin-top: 10px;
-}
-
-#loadingText {
-    color: red;
-    font-weight: bold;
-    margin-top: 20px;
-    display: none;
-}
-
-footer {
-    background-color: #F7F7F7;
-    height: 110px;
-    margin: -8px;
-    position: relative;
-}
-
-.footer_img {
-    height: 25px;
-    margin: 15px 25px;
-}
-
-small {
-    margin: 15px 25px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+#preview {
+    display: block; /* 中央揃え */
+    margin: 20px auto; /* 上下20px、左右中央 */
+    max-width: 100%; /* 親要素内で縮小 */
+    height: auto;
+    border: 2px solid #ddd; /* 枠線 */
+    border-radius: 10px; /* 角丸 */
 }
