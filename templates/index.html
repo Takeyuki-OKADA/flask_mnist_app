@@ -19,15 +19,14 @@
         <form method="POST" enctype="multipart/form-data">
             <input class="file_choose" type="file" name="file" id="file-input" accept="image/*">
 
-            <!-- プレビュー画像を中央に配置 -->
-            <div id="preview-container">
+            <!-- 画像プレビュー（中央配置） -->
+            <div class="preview-container">
                 <img id="preview" src="" alt="選択した画像がここに表示されます" style="display:none;">
             </div>
 
             <input class="btn" value="submit!" type="submit" id="submit-btn">
         </form>
 
-        <!-- 予測結果表示 -->
         <div class="answer">{{ answer }}</div>
     </div>
 

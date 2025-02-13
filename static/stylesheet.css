@@ -1,14 +1,13 @@
-/* 画像プレビュー */
-#preview-container {
-    text-align: center; /* 中央配置 */
+.preview-container {
+    text-align: center; /* 中央寄せ */
     margin-top: 20px;
 }
 
 #preview {
-    display: block; /* 中央揃え */
-    margin: 20px auto; /* 上下20px、左右中央 */
-    max-width: 100%; /* 親要素内で縮小 */
+    max-width: 200px; /* 画像の最大幅 */
     height: auto;
-    border: 2px solid #ddd; /* 枠線 */
-    border-radius: 10px; /* 角丸 */
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #76B55B; /* 緑の枠 */
+    border-radius: 10px;
 }
