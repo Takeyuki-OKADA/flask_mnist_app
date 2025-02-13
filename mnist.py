@@ -1,4 +1,5 @@
 import os
+import io  # 🔹 追加
 from flask import Flask, request, redirect, render_template, flash
 from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
@@ -27,24 +28,24 @@ def upload_file():
         if 'file' not in request.files:
             flash('ファイルがありません')
             return redirect(request.url)
+
         file = request.files['file']
+
         if file.filename == '':
             flash('ファイルがありません')
             return redirect(request.url)
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            filepath = os.path.join(UPLOAD_FOLDER, filename)
 
-            # 画像を縮小して保存する（メモリ負荷を減らす）
-            img = image.load_img(file, color_mode='grayscale', target_size=(image_size, image_size))
-            img = img.resize((image_size, image_size))
-            img.save(filepath)
+            # 🔹 画像データをバイナリからロード（修正ポイント）
+            img = image.load_img(io.BytesIO(file.read()), color_mode='grayscale', target_size=(image_size, image_size))
 
-            # 画像データの変換
+            # 🔹 NumPy に変換
             img = image.img_to_array(img)
             data = np.array([img])
 
-            # 予測処理
+            # 🔹 予測処理
             result = model.predict(data)[0]
             predicted = result.argmax()
             pred_answer = f"これは {classes[predicted]} です"
