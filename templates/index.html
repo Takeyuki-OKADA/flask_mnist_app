@@ -6,42 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Number Classifier</title>
     <link rel="stylesheet" href="./static/stylesheet.css">
-    <script>
-        function disableButton() {
-            let button = document.getElementById("submit-btn");
-            button.disabled = true;
-            button.value = "予測中...";
-            button.classList.add("disabled");
-        }
-
-        function enableButton() {
-            let button = document.getElementById("submit-btn");
-            button.disabled = false;
-            button.value = "Submit!";
-            button.classList.remove("disabled");
-        }
-
-        // ページが読み込まれたらボタンを元に戻す
-        window.onload = function () {
-            enableButton();
-        };
-    </script>
 </head>
-<script>
-    document.getElementById("fileInput").addEventListener("change", function (event) {
-        var file = event.target.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var previewImage = document.getElementById("previewImage");
-                previewImage.src = e.target.result;
-                previewImage.style.display = "block";
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-
 <body>
     <header>
         <a class="header-logo" href="#">読むぞ手書き数字</a>
@@ -50,15 +15,50 @@
     <div class="main">
         <h2> AIが送信された画像の数字を識別します(テスト中)</h2>
         <p>画像を送信してください</p>
-        <form method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
-            <input class="file_choose" type="file" name="file" required>
-            <input id="submit-btn" class="btn" value="Submit!" type="submit">
+
+        <form method="POST" enctype="multipart/form-data">
+            <input class="file_choose" type="file" name="file" id="fileInput">
+            <input class="btn" value="submit!" type="submit" id="submitButton">
         </form>
-        <div class="answer">{{ answer }}</div>
+
+        <div class="preview">
+            <img id="previewImage" src="" alt="画像プレビュー" style="display: none;">
+        </div>
+
+        <div class="answer" id="predictionText">{{ answer }}</div>
+        <div id="loadingText" style="display: none;">処理中...</div>
     </div>
 
     <footer>
         <small>&copy; 2025 岡田製作所</small>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let fileInput = document.getElementById("fileInput");
+            let previewImage = document.getElementById("previewImage");
+            let submitButton = document.getElementById("submitButton");
+            let predictionText = document.getElementById("predictionText");
+            let loadingText = document.getElementById("loadingText");
+
+            fileInput.addEventListener("change", function (event) {
+                var file = event.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = "block";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.querySelector("form").addEventListener("submit", function () {
+                submitButton.disabled = true;  // ボタンを無効化
+                loadingText.style.display = "block";  // 「処理中...」を表示
+                predictionText.style.display = "none"; // 予測結果を非表示
+            });
+        });
+    </script>
 </body>
 </html>
