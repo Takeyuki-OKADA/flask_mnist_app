@@ -1,3 +1,4 @@
+/* ======= ヘッダー ======= */
 header {
     background-color: #76B55B;
     height: 60px;
@@ -13,50 +14,85 @@ header {
     margin: 15px 25px;
 }
 
+.header_img {
+    height: 25px;
+    margin: 15px 25px;
+}
+
+/* ======= メインエリア ======= */
 .main {
-    text-align: center;
     height: 370px;
+    text-align: center;
 }
 
-h2, p {
+h2 {
     color: #444444;
+    margin: 90px 0px;
+    text-align: center;
 }
 
-.answer {
+p {
     color: #444444;
-    font-size: 24px; /* 文字サイズを大きく */
-    font-weight: bold;
-    margin-top: 20px;
+    margin: 70px 0px 30px 0px;
+    text-align: center;
 }
 
+/* ======= フォーム（ファイル選択 & 送信ボタン） ======= */
 form {
-    margin-top: 20px;
+    text-align: center;
 }
 
 .file_choose {
-    display: block;
-    margin: 10px auto;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .btn {
-    background-color: #4CAF50;
+    background-color: #76B55B;
     color: white;
     font-size: 16px;
     padding: 10px 20px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
 }
 
     .btn:hover {
-        background-color: #45a049;
+        background-color: #5a8f48;
     }
 
-    .btn.disabled {
-        background-color: gray;
-        cursor: not-allowed;
-    }
+/* ======= プレビュー画像（新規追加） ======= */
+.preview {
+    text-align: center;
+    margin-top: 20px;
+}
 
+#previewImage {
+    max-width: 250px; /* 適度なサイズに制限 */
+    height: auto;
+    border: 2px solid #76B55B;
+    border-radius: 10px;
+    padding: 5px;
+    display: none; /* 初期は非表示 */
+}
+
+/* ======= 予測結果（強調表示） ======= */
+.answer {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d9534f;
+    margin-top: 20px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* ======= フッター ======= */
 footer {
     background-color: #F7F7F7;
     height: 110px;
@@ -65,9 +101,15 @@ footer {
     text-align: center;
 }
 
+.footer_img {
+    height: 25px;
+    margin: 15px 25px;
+}
+
 small {
+    margin: 15px 25px;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 10px;
+    left: 0;
+    bottom: 0;
+    color: #777;
 }

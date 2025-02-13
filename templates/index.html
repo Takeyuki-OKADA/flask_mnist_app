@@ -27,6 +27,21 @@
         };
     </script>
 </head>
+<script>
+    document.getElementById("fileInput").addEventListener("change", function (event) {
+        var file = event.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var previewImage = document.getElementById("previewImage");
+                previewImage.src = e.target.result;
+                previewImage.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
 <body>
     <header>
         <a class="header-logo" href="#">読むぞ手書き数字</a>
