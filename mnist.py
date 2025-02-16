@@ -38,7 +38,7 @@ def upload_file():
 
         try:
             img = Image.open(io.BytesIO(file.read())).convert('L').resize((28, 28))
-            img = np.array(img).reshape(1, 28, 28, 1).astype(np.float32) / 255.0
+            img = np.array(img).reshape(1, 28, 28, 1).astype(np.float16) / 255.0  # float32 → float16 に変更
 
             print(f"画像の形状: {img.shape}")
             print("推論開始")
