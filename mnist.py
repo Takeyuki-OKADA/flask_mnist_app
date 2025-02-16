@@ -1,5 +1,6 @@
 import io
 import os
+import time
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
@@ -42,8 +43,13 @@ def upload_file():
 
             print(f"画像の形状: {img.shape}")
             print("推論開始")
-
+            
+            # 推論時間の測定
+            start_time = time.time()
             result = model.predict(img)[0]
+            end_time = time.time()
+            print(f"推論時間: {end_time - start_time:.2f} 秒")
+
             print("推論結果の配列:", result)
 
             predicted = result.argmax()
