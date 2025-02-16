@@ -1,6 +1,8 @@
 import io
 import os
 import time
+import tensorflow as tf
+import matplotlib.pyplot as plt
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 from tensorflow.keras.models import load_model
@@ -39,14 +41,21 @@ def upload_file():
 
         try:
             img = Image.open(io.BytesIO(file.read())).convert('L').resize((28, 28))
-            img = np.array(img).reshape(1, 28, 28, 1).astype(np.float16) / 255.0  # float32 → float16 に変更
+            img = np.array(img).reshape(1, 28, 28, 1).astype(np.float32) / 255.0  # float16 → float32 に変更
 
             print(f"画像の形状: {img.shape}")
             print("推論直前のメモリ状態確認")
+
+            # 画像を確認（デバッグ用）
+            plt.imshow(img.reshape(28, 28), cmap="gray")
+            plt.title("Processed Image")
+            plt.savefig("debug_image.png")  # 画像を保存
+            plt.close()
             
             # 推論時間の測定
             start_time = time.time()
             result = model.predict(img)[0]
+            result = tf.nn.softmax(result).numpy()  # softmax を適用
             end_time = time.time()
             print(f"推論時間: {end_time - start_time:.2f} 秒")
 
