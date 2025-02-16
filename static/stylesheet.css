@@ -1,22 +1,93 @@
-.preview-container {
+header {
+    background-color: #76B55B;
+    height: 60px;
+    margin: -8px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.header-logo {
+    color: #fff;
+    font-size: 25px;
+    margin: 15px 25px;
+}
+
+.header_img {
+    height: 25px;
+    margin: 15px 25px;
+}
+
+.main {
+    height: 450px;
+    text-align: center;
+}
+
+h2, p {
+    color: #444444;
+    text-align: center;
+}
+
+.answer {
+    color: #444444;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+form {
     text-align: center;
     margin-top: 20px;
 }
 
-#preview {
-    max-width: 250px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border: 2px solid #164e9d;
-    border-radius: 10px;
+.file_choose {
+    margin: 10px 0;
 }
 
-/* 結果のスタイル */
-#result {
-    font-size: 30px;  /* 文字を大きく */
-    font-weight: bold;
-    color: #164e9d;
-    margin-top: 10px;
-    text-align: center;
+#imagePreview {
+    display: none;
+    max-width: 200px;
+    border-radius: 10px;
+    margin: 15px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+    background-color: #76B55B;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: #5d9249;
+}
+
+footer {
+    background-color: #F7F7F7;
+    height: 110px;
+    margin: -8px;
+    position: relative;
+}
+
+.footer_img {
+    height: 25px;
+    margin: 15px 25px;
+}
+
+small {
+    margin: 15px 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }

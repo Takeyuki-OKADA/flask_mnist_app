@@ -5,68 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Number Classifier</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+    <link rel="stylesheet" href="./static/stylesheet.css">
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+            document.getElementById('submitButton').disabled = false;
+            document.getElementById('result').innerText = '';
+        }
+
+        function disableButton() {
+            const button = document.getElementById('submitButton');
+            button.disabled = true;
+            button.value = '判定中...';
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <a class="header-logo" href="#">読むぞ手書き数字</a>
+    <header>   
+        <img class="header_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy">
+        <a class="header-logo" href="#">Number Classifier</a>
     </header>
 
-    <div class="main">
-        <h2> AIが送信された画像の数字を識別します (テスト中)</h2>
+    <div class="main">    
+        <h2> AIが送信された画像の数字を識別します</h2>
         <p>画像を送信してください</p>
-
-        <form method="POST" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
-            <input class="file_choose" type="file" name="file" id="file-input" accept="image/*">
-
-            <div class="preview-container">
-                <img id="preview" src="" alt="選択した画像がここに表示されます" style="display:none;">
-                <div id="result">{{ answer }}</div>  <!-- ここに結果を大きく表示 -->
-            </div>
-
-            <input class="btn" value="読み取る" type="submit" id="submit-btn">
+        <form method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
+            <input class="file_choose" type="file" name="file" onchange="previewImage(event)">
+            <br>
+            <img id="imagePreview" style="display:none; max-width: 200px; border-radius: 10px; margin: 10px auto;" alt="Image Preview">
+            <br>
+            <input id="submitButton" class="btn" value="submit!" type="submit" disabled>
         </form>
+        <div id="result" class="answer" style="font-size: 24px; font-weight: bold;">{{answer}}</div>
     </div>
 
     <footer>
-        <small>&copy; 2025 岡田製作所</small>
+        <img class="footer_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy">
+        <small>&copy; 2019 Aidemy, inc.</small>   
     </footer>
-
-    <script>
-        // 画像プレビュー機能
-        document.getElementById("file-input").addEventListener("change", function (event) {
-            const file = event.target.files[0];
-            const preview = document.getElementById("preview");
-
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                    preview.style.display = "block";
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.style.display = "none";
-            }
-        });
-
-        // フォーム送信時の処理
-        function handleSubmit(event) {
-            const submitBtn = document.getElementById("submit-btn");
-            const fileInput = document.getElementById("file-input");
-            
-            // ボタンとファイル選択を無効化
-            submitBtn.value = "識別中...";
-            submitBtn.disabled = true;
-            fileInput.disabled = true;
-
-            // 3秒後に再度有効化
-            setTimeout(() => {
-                submitBtn.value = "読み取る";
-                submitBtn.disabled = false;
-                fileInput.disabled = false;
-            }, 3000);
-        }
-    </script>
 </body>
 </html>
