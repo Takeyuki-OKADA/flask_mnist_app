@@ -57,10 +57,11 @@ def upload_file():
             result = model.predict(img)
 
             if result is None:
-                print("エラー: 推論結果が None になっています")
+                print("エラー: `model.predict(img)` の結果が None です")
                 return render_template("index.html", answer="推論に失敗しました")
             
-            print("推論結果の生データ:", result)
+            print(f"推論結果の型: {type(result)}")  # デバッグ: 型を出力
+            print(f"推論結果の形状: {result.shape}")  # デバッグ: 形状を出力
 
             # softmax を適用して確率に変換
             result = tf.nn.softmax(result[0]).numpy()
