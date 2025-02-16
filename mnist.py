@@ -54,22 +54,27 @@ def upload_file():
             
             # 推論処理
             print("推論実行中...")
-            result = model.predict(img)
+            try:
+                result = model.predict(img)
 
-            if result is None:
-                print("エラー: `model.predict(img)` の結果が None です")
+                if result is None:
+                    print("エラー: `model.predict(img)` の結果が None です")
+                    return render_template("index.html", answer="推論に失敗しました")
+                
+                print(f"推論結果の型: {type(result)}")  # デバッグ: 型を出力
+                print(f"推論結果の形状: {result.shape}")  # デバッグ: 形状を出力
+
+                # softmax を適用して確率に変換
+                result = tf.nn.softmax(result[0]).numpy()
+                print("推論結果の配列:", result)
+
+                predicted = result.argmax()
+                pred_answer = f"これは {classes[predicted]} です"
+                print("判定結果:", pred_answer)
+
+            except Exception as e:
+                print("エラー: 推論処理中に例外発生", e)
                 return render_template("index.html", answer="推論に失敗しました")
-            
-            print(f"推論結果の型: {type(result)}")  # デバッグ: 型を出力
-            print(f"推論結果の形状: {result.shape}")  # デバッグ: 形状を出力
-
-            # softmax を適用して確率に変換
-            result = tf.nn.softmax(result[0]).numpy()
-            print("推論結果の配列:", result)
-
-            predicted = result.argmax()
-            pred_answer = f"これは {classes[predicted]} です"
-            print("判定結果:", pred_answer)
 
         except Exception as e:
             print("エラー:", e)
