@@ -10,6 +10,7 @@
         function previewImage(event) {
             const file = event.target.files[0];
             if (file) {
+                console.log("ファイル選択:", file.name);  // デバッグ用
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const preview = document.getElementById('imagePreview');
@@ -19,15 +20,13 @@
                 reader.readAsDataURL(file);
             }
             document.getElementById('submitButton').disabled = false;
-            document.getElementById('fileInput').disabled = false;
             document.getElementById('result').innerText = '';
         }
 
         function disableButton() {
+            console.log("送信開始");  // デバッグ用
             const button = document.getElementById('submitButton');
-            const fileInput = document.getElementById('fileInput');
             button.disabled = true;
-            fileInput.disabled = true;
             button.value = '判定中...';
         }
     </script>
