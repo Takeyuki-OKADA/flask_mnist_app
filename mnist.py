@@ -54,6 +54,6 @@ def upload_file():
     return render_template("index.html", answer=pred_answer)
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 10000))
+    port = int(os.environ.get("PORT", 5000))  # Render の自動割り当てポートを使用
     print(f"アプリ起動: ポート {port}")
     app.run(host='0.0.0.0', port=port, threaded=True)
