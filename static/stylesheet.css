@@ -1,13 +1,13 @@
 .preview-container {
-    text-align: center; /* ’†‰›Šñ‚¹ */
+    text-align: center; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     margin-top: 20px;
 }
 
 #preview {
-    max-width: 200px; /* ‰æ‘œ‚ÌÅ‘å• */
+    max-width: 200px; /* ï¿½æ‘œï¿½ÌÅ‘å• */
     height: auto;
     display: block;
     margin: 0 auto;
-    border: 2px solid #76B55B; /* —Î‚Ì˜g */
+    border: 2px solid #164e9d; /* ï¿½Î‚Ì˜g */
     border-radius: 10px;
 }
