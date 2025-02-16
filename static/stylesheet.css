@@ -1,13 +1,13 @@
 .preview-container {
-    text-align: center; /* ������ */
+    text-align: center; /* 画像を中央配置 */
     margin-top: 20px;
 }
 
 #preview {
-    max-width: 200px; /* �摜�̍ő啝 */
+    max-width: 250px; /* 画像の最大幅 */
     height: auto;
     display: block;
     margin: 0 auto;
-    border: 2px solid #164e9d; /* �΂̘g */
-    border-radius: 10px;
+    border: 2px solid #164e9d; /* 枠線の色 */
+    border-radius: 10px; /* 角を丸くする */
 }

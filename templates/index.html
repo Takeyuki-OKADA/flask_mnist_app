@@ -16,7 +16,7 @@
         <h2> AIが送信された画像の数字を識別します (テスト中)</h2>
         <p>画像を送信してください</p>
 
-        <form method="POST" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
+        <form method="POST" enctype="multipart/form-data" onsubmit="return handleSubmit(event)">
             <input class="file_choose" type="file" name="file" id="file-input" accept="image/*">
 
             <div class="preview-container">
@@ -55,18 +55,19 @@
         function handleSubmit(event) {
             const submitBtn = document.getElementById("submit-btn");
             const fileInput = document.getElementById("file-input");
-            
+
+            // ファイルが選択されているか確認
+            if (!fileInput.files.length) {
+                alert("画像を選択してください。");
+                return false;
+            }
+
             // ボタンとファイル選択を無効化
             submitBtn.value = "識別中...";
             submitBtn.disabled = true;
             fileInput.disabled = true;
 
-            // 3秒後に再度有効化
-            setTimeout(() => {
-                submitBtn.value = "読み取る";
-                submitBtn.disabled = false;
-                fileInput.disabled = false;
-            }, 3000);
+            return true; // フォームを送信
         }
     </script>
 </body>
