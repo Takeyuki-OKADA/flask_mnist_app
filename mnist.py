@@ -1,16 +1,37 @@
+import io
+import os
+from flask import Flask, request, render_template
+from werkzeug.utils import secure_filename
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+import numpy as np
+from PIL import Image
+
+classes = ["0","1","2","3","4","5","6","7","8","9"]
+image_size = 28
+
+# Flaskアプリケーションのインスタンスを定義
+app = Flask(__name__)
+
+# モデルを起動時に読み込む（compile=False でロード時間短縮）
+model = load_model('./model.keras', compile=False)
+print("モデルロード完了")
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     pred_answer = ""
 
     if request.method == 'POST':
         print("POSTリクエスト受信")
-        print("受け取ったファイル一覧:", request.files.keys())  # 追加
-
+        print("受け取ったファイル一覧:", request.files.keys())  # デバッグ用
+        
         if 'file' not in request.files:
             print("エラー: ファイルが送信されていません")
             return render_template("index.html", answer="ファイルがありません")
 
         file = request.files['file']
+        print("受け取ったファイル名:", file.filename)  # デバッグ用
+
         if file.filename == '':
             print("エラー: ファイルが選択されていません")
             return render_template("index.html", answer="ファイルがありません")
@@ -34,3 +55,8 @@ def upload_file():
             return render_template("index.html", answer="エラーが発生しました")
 
     return render_template("index.html", answer=pred_answer)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render の自動割り当てポートを使用
+    print(f"アプリ起動: ポート {port}")
+    app.run(host='0.0.0.0', port=port, threaded=True)
