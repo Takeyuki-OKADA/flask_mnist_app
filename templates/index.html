@@ -19,27 +19,29 @@
                 reader.readAsDataURL(file);
             }
             document.getElementById('submitButton').disabled = false;
+            document.getElementById('fileInput').disabled = false;
             document.getElementById('result').innerText = '';
         }
 
         function disableButton() {
             const button = document.getElementById('submitButton');
+            const fileInput = document.getElementById('fileInput');
             button.disabled = true;
+            fileInput.disabled = true;
             button.value = '判定中...';
         }
     </script>
 </head>
 <body>
     <header>   
-        <img class="header_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy">
-        <a class="header-logo" href="#">Number Classifier</a>
+        <a class="header-logo" href="#">読めるか手書き数字AI</a>
     </header>
 
     <div class="main">    
-        <h2> AIが送信された画像の数字を識別します</h2>
+        <h2> AIが送信された画像の数字を識別できるかもしれません</h2>
         <p>画像を送信してください</p>
         <form method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
-            <input class="file_choose" type="file" name="file" onchange="previewImage(event)">
+            <input id="fileInput" class="file_choose" type="file" name="file" onchange="previewImage(event)">
             <br>
             <img id="imagePreview" style="display:none; max-width: 200px; border-radius: 10px; margin: 10px auto;" alt="Image Preview">
             <br>
@@ -48,9 +50,8 @@
         <div id="result" class="answer" style="font-size: 24px; font-weight: bold;">{{answer}}</div>
     </div>
 
-    <footer>
-        <img class="footer_img" src="https://aidemyexstorage.blob.core.windows.net/aidemycontents/1621500180546399.png" alt="Aidemy">
-        <small>&copy; 2019 Aidemy, inc.</small>   
+    <footer>    
+        <small>&copy; 2025 岡田製作所</small>   
     </footer>
 </body>
 </html>
