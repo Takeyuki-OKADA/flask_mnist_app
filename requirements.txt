@@ -16,6 +16,7 @@ itsdangerous
 idna
 Jinja2
 line-bot-sdk
+matplotlib
 Markdown
 MarkupSafe
 numpy
