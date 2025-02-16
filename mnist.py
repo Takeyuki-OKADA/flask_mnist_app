@@ -52,13 +52,18 @@ def upload_file():
             plt.savefig("debug_image.png")  # 画像を保存
             plt.close()
             
-            # 推論時間の測定
-            start_time = time.time()
-            result = model.predict(img)[0]
-            result = tf.nn.softmax(result).numpy()  # softmax を適用
-            end_time = time.time()
-            print(f"推論時間: {end_time - start_time:.2f} 秒")
+            # 推論処理
+            print("推論実行中...")
+            result = model.predict(img)
 
+            if result is None:
+                print("エラー: 推論結果が None になっています")
+                return render_template("index.html", answer="推論に失敗しました")
+            
+            print("推論結果の生データ:", result)
+
+            # softmax を適用して確率に変換
+            result = tf.nn.softmax(result[0]).numpy()
             print("推論結果の配列:", result)
 
             predicted = result.argmax()
