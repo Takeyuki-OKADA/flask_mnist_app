@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Number Classifier</title>
-    <link rel="stylesheet" href="./static/stylesheet.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
 </head>
 <body>
     <header>
@@ -16,17 +16,16 @@
         <h2> AIが送信された画像の数字を識別します (テスト中)</h2>
         <p>画像を送信してください</p>
 
-        <form method="POST" enctype="multipart/form-data" onsubmit="return handleSubmit(event)">
+        <form method="POST" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
             <input class="file_choose" type="file" name="file" id="file-input" accept="image/*">
 
             <div class="preview-container">
                 <img id="preview" src="" alt="選択した画像がここに表示されます" style="display:none;">
+                <div id="result">{{ answer }}</div>  <!-- ここに結果を大きく表示 -->
             </div>
 
             <input class="btn" value="読み取る" type="submit" id="submit-btn">
         </form>
-
-        <div class="answer">{{ answer }}</div>
     </div>
 
     <footer>
@@ -55,19 +54,18 @@
         function handleSubmit(event) {
             const submitBtn = document.getElementById("submit-btn");
             const fileInput = document.getElementById("file-input");
-
-            // ファイルが選択されているか確認
-            if (!fileInput.files.length) {
-                alert("画像を選択してください。");
-                return false;
-            }
-
+            
             // ボタンとファイル選択を無効化
             submitBtn.value = "識別中...";
             submitBtn.disabled = true;
             fileInput.disabled = true;
 
-            return true; // フォームを送信
+            // 3秒後に再度有効化
+            setTimeout(() => {
+                submitBtn.value = "読み取る";
+                submitBtn.disabled = false;
+                fileInput.disabled = false;
+            }, 3000);
         }
     </script>
 </body>
