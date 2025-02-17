@@ -64,6 +64,7 @@ def upload_file():
                 
                 print(f"推論結果の型: {type(result)}")  # デバッグ: 型を出力
                 print(f"推論結果の形状: {result.shape}")  # デバッグ: 形状を出力
+                print("推論結果の生データ:", result)  # 追加: 生の推論データを確認
 
                 # softmax を適用して確率に変換
                 result = tf.nn.softmax(result[0]).numpy()
