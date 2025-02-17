@@ -56,6 +56,7 @@ def upload_file():
             print("推論実行中...")
             try:
                 result = model.predict(img)
+                print("推論が完了しました")  # デバッグ用
 
                 if result is None:
                     print("エラー: `model.predict(img)` の結果が None です")
