@@ -19,6 +19,7 @@ app = Flask(__name__)
 # モデルを起動時に読み込む（compile=False でロード時間短縮）
 model = load_model('./model.keras', compile=False)
 print("モデルロード完了")
+model.summary(print_fn=lambda x: print(x, flush=True))  # モデルの構造をログ出力
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -43,6 +44,7 @@ def upload_file():
             img = Image.open(io.BytesIO(file.read())).convert('L').resize((28, 28))
             img = np.array(img).reshape(1, 28, 28, 1).astype(np.float32) / 255.0  # float16 → float32 に変更
 
+            print(f"画像データの統計: min={img.min()}, max={img.max()}, mean={img.mean()}", flush=True)
             print(f"画像の形状: {img.shape}", flush=True)
             print("推論直前のメモリ状態確認", flush=True)
 
