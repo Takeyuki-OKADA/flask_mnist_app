@@ -25,26 +25,26 @@ def upload_file():
     pred_answer = ""
 
     if request.method == 'POST':
-        print("POSTリクエスト受信")
-        print("受け取ったファイル一覧:", request.files.keys())  # デバッグ用
+        print("POSTリクエスト受信", flush=True)
+        print("受け取ったファイル一覧:", request.files.keys(), flush=True)  # デバッグ用
         
         if 'file' not in request.files:
-            print("エラー: ファイルが送信されていません")
+            print("エラー: ファイルが送信されていません", flush=True)
             return render_template("index.html", answer="ファイルがありません")
 
         file = request.files['file']
-        print("受け取ったファイル名:", file.filename)  # デバッグ用
+        print("受け取ったファイル名:", file.filename, flush=True)  # デバッグ用
 
         if file.filename == '':
-            print("エラー: ファイルが選択されていません")
+            print("エラー: ファイルが選択されていません", flush=True)
             return render_template("index.html", answer="ファイルがありません")
 
         try:
             img = Image.open(io.BytesIO(file.read())).convert('L').resize((28, 28))
             img = np.array(img).reshape(1, 28, 28, 1).astype(np.float32) / 255.0  # float16 → float32 に変更
 
-            print(f"画像の形状: {img.shape}")
-            print("推論直前のメモリ状態確認")
+            print(f"画像の形状: {img.shape}", flush=True)
+            print("推論直前のメモリ状態確認", flush=True)
 
             # 画像を確認（デバッグ用）
             plt.imshow(img.reshape(28, 28), cmap="gray")
@@ -53,38 +53,38 @@ def upload_file():
             plt.close()
             
             # 推論処理
-            print("推論実行中...")
+            print("推論実行中...", flush=True)
             try:
                 result = model.predict(img)
-                print("推論が完了しました")  # デバッグ用
+                print("推論が完了しました", flush=True)  # デバッグ用
 
                 if result is None:
-                    print("エラー: `model.predict(img)` の結果が None です")
+                    print("エラー: `model.predict(img)` の結果が None です", flush=True)
                     return render_template("index.html", answer="推論に失敗しました")
                 
-                print(f"推論結果の型: {type(result)}")  # デバッグ: 型を出力
-                print(f"推論結果の形状: {result.shape}")  # デバッグ: 形状を出力
-                print("推論結果の生データ:", result)  # 追加: 生の推論データを確認
+                print(f"推論結果の型: {type(result)}", flush=True)  # デバッグ: 型を出力
+                print(f"推論結果の形状: {result.shape}", flush=True)  # デバッグ: 形状を出力
+                print("推論結果の生データ:", result, flush=True)  # 追加: 生の推論データを確認
 
                 # softmax を適用して確率に変換
                 result = tf.nn.softmax(result[0]).numpy()
-                print("推論結果の配列:", result)
+                print("推論結果の配列:", result, flush=True)
 
                 predicted = result.argmax()
                 pred_answer = f"これは {classes[predicted]} です"
-                print("判定結果:", pred_answer)
+                print("判定結果:", pred_answer, flush=True)
 
             except Exception as e:
-                print("エラー: 推論処理中に例外発生", e)
+                print("エラー: 推論処理中に例外発生", e, flush=True)
                 return render_template("index.html", answer="推論に失敗しました")
 
         except Exception as e:
-            print("エラー:", e)
+            print("エラー:", e, flush=True)
             return render_template("index.html", answer="エラーが発生しました")
 
     return render_template("index.html", answer=pred_answer)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Render の自動割り当てポートを使用
-    print(f"アプリ起動: ポート {port}")
+    print(f"アプリ起動: ポート {port}", flush=True)
     app.run(host='0.0.0.0', port=port, threaded=True)
