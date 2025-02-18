@@ -27,18 +27,18 @@
             console.log("送信開始");  // デバッグ用
             const button = document.getElementById('submitButton');
             button.disabled = true;
-            button.value = '判定中...';
+            button.value = '考え中...';
         }
     </script>
 </head>
 <body>
     <header>   
-        <a class="header-logo" href="#">読めるか手書き数字AI</a>
+        <a class="header-logo" href="#">読むぞ！手書き数字AI</a>
     </header>
 
     <div class="main">    
-        <h2> AIが送信された画像の数字を識別できるかもしれません</h2>
-        <p>画像を送信してください</p>
+        <h2> 生まれたてのAIが送信された画像の数字を識別できるかもしれません</h2>
+        <p>1桁の数字の画像を送信してください</p>
         <form method="POST" enctype="multipart/form-data" onsubmit="disableButton()">
             <input id="fileInput" class="file_choose" type="file" name="file" onchange="previewImage(event)">
             <br>

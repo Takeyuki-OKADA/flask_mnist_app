@@ -73,7 +73,7 @@ def upload_file():
                 print("推論結果の配列:", result, flush=True)
 
                 predicted = result.argmax()
-                pred_answer = f"これは {classes[predicted]} です"
+                pred_answer = f"きっと、これは {classes[predicted]} じゃないっすか？"
                 print("判定結果:", pred_answer, flush=True)
 
             except Exception as e:
