@@ -8,6 +8,19 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from PIL import Image
 import cv2
+import sys
+import subprocess
+
+try:
+    import cv2
+    print("✅ OpenCV is successfully imported:", cv2.__version__)
+except ModuleNotFoundError:
+    print("❌ OpenCV is missing. Attempting to install...")
+    subprocess.run([sys.executable, "-m", "pip", "install", "opencv-python-headless"])
+    import cv2
+    print("✅ OpenCV installed successfully:", cv2.__version__)
+
+
 
 # クラスラベル
 CLASSES = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
