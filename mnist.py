@@ -1,3 +1,15 @@
+import sys
+import subprocess
+
+# OpenCV のインストールチェック
+try:
+    import cv2
+except ModuleNotFoundError:
+    print("❌ OpenCV is missing. Attempting to install...")
+    subprocess.run([sys.executable, "-m", "pip", "install", "--no-cache-dir", "opencv-python-headless"])
+    import cv2
+    print("✅ OpenCV installed successfully:", cv2.__version__)
+
 import os
 import cv2
 import numpy as np
